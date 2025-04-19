@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthy Recipes</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f8f8f8, #e0e0e0);
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-wrap: wrap;
+        padding: 2rem;
+      }
+
+      .recipe-card {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        width: 100%;
+        max-width: 350px;
+        height: 450px; 
+        margin: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .recipe-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .recipe-card img {
+        width: 100%;
+        height: 300px; 
+        object-fit: cover; 
+      }
+
+      .recipe-content {
+        flex: 1;
+        padding: 15px;
+        text-align: center;
+      }
+
+      .recipe-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .recipe-description {
+        color: #555;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .recipe-card button {
+        background: linear-gradient(45deg, #007bff, #6610f2);
+        border: none;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .recipe-card button:hover {
+        background: linear-gradient(45deg, #6610f2, #007bff);
+      }
+
+      /* Modal Styles */
+      .recipe-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 10px;
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .recipe-card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+  }
+
+  .recipe-card img {
+    height: auto;
+    max-height: 250px;
+  }
+
+  .recipe-title {
+    font-size: 1.25rem;
+  }
+
+  .recipe-description {
+    font-size: 0.95rem;
+  }
+
+  .recipe-card button {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+  }
+
+  .modal-content {
+    padding: 1rem;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .close-modal {
+    top: 5px;
+    right: 10px;
+    font-size: 1.25rem;
+  }
+
+  #recipeTitle {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  #recipeImage {
+    margin-top: 1rem;
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  ul#recipeIngredients {
+    padding-left: 1rem;
+    font-size: 0.95rem;
+  }
+
+  #recipePreparation {
+    font-size: 0.95rem;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="recipe-card">
+      <img src="images/chicken.webp" alt="Grilled Chicken Salad" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Grilled Chicken Salad</h2>
+        <button onclick="viewRecipe(0)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/quinoa.webp" alt="Quinoa Veggie Stir-fry" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Quinoa Veggie Stir-fry</h2>
+        <button onclick="viewRecipe(1)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/lentil.webp" alt=" Lentil Soup" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Lentil Soup</h2>
+        <button onclick="viewRecipe(2)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/carrot.webp" alt="Carrot Ginger Detox Juice " />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Carrot Ginger Detox Juice</h2>
+        <button onclick="viewRecipe(3)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img
+        src="images/avocadotoast.webp"
+        alt="Avocado Toast with Poached Egg "
+      />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Avocado Toast with Poached Egg</h2>
+        <button onclick="viewRecipe(4)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/ovenbakes.webp" alt="Oven-Baked Salmon" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Oven-Baked Salmon</h2>
+        <button onclick="viewRecipe(5)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/chickpea (2).webp" alt="Chickpea Salad" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Chickpea Salad</h2>
+        <button onclick="viewRecipe(6)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/pancake.webp" alt="Banana Oat Pancakes" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Banana Oat Pancakes</h2>
+        <button onclick="viewRecipe(7)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/Berry.webp" alt="Berry Banana Spinach Smoothie" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Berry Banana Spinach Smoothie</h2>
+        <button onclick="viewRecipe(8)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/omlette.webp" alt="Spinach and Mushroom Omelette" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Spinach and Mushroom Omelette</h2>
+        <button onclick="viewRecipe(9)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/lemonsalmon.webp" alt="Grilled Lemon Garlic Salmon " />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Grilled Lemon Garlic Salmon</h2>
+        <button onclick="viewRecipe(10)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/capsicum.webp" alt="Stuffed Bell Peppers" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Stuffed Bell Peppers</h2>
+        <button onclick="viewRecipe(11)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/mango.webp" alt="Mango & Spinach Smoothie" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Mango & Spinach Smoothie</h2>
+        <button onclick="viewRecipe(12)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/apple.webp" alt="Kale & Apple Salad" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Kale & Apple Salad</h2>
+        <button onclick="viewRecipe(13)">View Recipe</button>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <img src="images/chocolate.webp" alt="Dark Chocolate Avocado Mousse" />
+      <div class="recipe-content">
+        <h2 class="recipe-title">Dark Chocolate Avocado Mousse</h2>
+        <button onclick="viewRecipe(14)">View Recipe</button>
+      </div>
+    </div>
+    <!-- Recipe Modal -->
+    <div class="recipe-modal" id="recipeModal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h2 id="recipeTitle"></h2>
+        <img
+          id="recipeImage"
+          alt="Recipe Image"
+          style="width: 100%; border-radius: 10px"
+        />
+        <h3>Ingredients:</h3>
+        <ul id="recipeIngredients"></ul>
+        <h3>Preparation:</h3>
+        <p id="recipePreparation"></p>
+      </div>
+    </div>
+
+    <script>
+      // Recipe Data
+      const recipes = [
+        {
+          title: "Grilled Chicken Salad",
+          ingredients: [
+            "2 grilled chicken breasts (sliced)",
+            "Mixed greens (lettuce, spinach, arugula)",
+            "Cherry tomatoes (halved)",
+            "Cucumber (sliced)",
+            "Avocado (sliced)",
+            "Olive oil and lemon juice for dressing",
+            "Salt and pepper to taste",
+          ],
+          preparation:
+            "Arrange mixed greens on a plate. Add cherry tomatoes, cucumber, and avocado slices. Top with sliced grilled chicken. Drizzle with olive oil and lemon juice. Season with salt and pepper.",
+        },
+        {
+          title: "Quinoa and Veggie Stir-fry",
+          ingredients: [
+            "1 cup quinoa (cooked)",
+            "1 red bell pepper (sliced)",
+            "1 zucchini (sliced)",
+            "1 carrot (julienned)",
+            "1 cup broccoli florets",
+            "2 tbsp soy sauce (low sodium)",
+            "1 tbsp olive oil",
+            "1 clove garlic (minced)",
+            "Salt and pepper to taste",
+          ],
+          preparation:
+            "Heat olive oil in a pan and sauté garlic. Add vegetables and stir-fry until tender-crisp. Stir in cooked quinoa and soy sauce. Mix well and season with salt and pepper.",
+        },
+        {
+          title: "Lentil Soup",
+          ingredients: [
+            "1 cup lentils (rinsed)",
+            "1 onion (chopped)",
+            "2 carrots (chopped)",
+            "2 celery sticks (chopped)",
+            "4 cups vegetable broth",
+            "1 can diced tomatoes",
+            "1 tsp cumin",
+            "Salt and pepper to taste",
+          ],
+          preparation:
+            "In a pot, sauté onions, carrots, and celery.Add lentils, diced tomatoes, and vegetable broth.Season with cumin, salt, and pepper.Simmer for 30-40 minutes until lentils are tender.",
+        },
+        {
+          title: "Carrot Ginger Detox Juice ",
+          ingredients: [
+            "4 large carrots (peeled and chopped)",
+            "1-inch piece of fresh ginger (peeled)",
+            "1 apple (for sweetness, optional)",
+            "½ lemon (juiced)",
+            "½ cup water (if needed for blending)",
+          ],
+          preparation:
+            "Add carrots, ginger, and apple into a juicer. If using a blender, add water for easier blending and then strain the pulpMix in the lemon juice.Pour into a glass, serve chilled, and enjoy the zesty detox!",
+        },
+        {
+          title: "Avocado Toast with Poached Egg",
+          ingredients: [
+            "2 slices whole-grain bread (toasted)",
+            "1 avocado (mashed)",
+            "2 eggs (poached)",
+            "Chilli flakes (optional)",
+            "Salt and pepper to taste",
+          ],
+          preparation:
+            "Spread mashed avocado on toasted bread.Top each with a poached egg.Season with salt, pepper, and chili flakes.",
+        },
+        {
+          title: "Oven-Baked Salmon",
+          ingredients: [
+            "2 salmon fillets",
+            "1 lemon (sliced)",
+            "2 cloves garlic (minced)",
+            "Fresh dill (optional)",
+            "Olive oil",
+            "Salt and pepper to taste",
+          ],
+          preparation:
+            "Preheat oven to 400°F (200°C).Place salmon on a baking sheet.Drizzle with olive oil, garlic, salt, and pepper.Top with lemon slices and dill.Bake for 15-20 minutes until salmon is flaky.",
+        },
+        {
+          title: "Chickpea Salad",
+          ingredients: [
+            "1 can chickpeas (drained and rinsed)",
+            "1 cucumber (diced)",
+            "1 tomato (diced)",
+            "1 red onion (chopped)",
+            "Olive oil and lemon juice for dressing",
+            "Salt and pepper to taste",
+          ],
+          preparation:
+            "Mix chickpeas, cucumber, tomato, and onion in a bowl.Drizzle with olive oil and lemon juice.Season with salt and pepper.",
+        },
+        {
+          title: "Banana Oat Pancakes",
+          ingredients: [
+            "1 ripe banana (mashed)",
+            "1 cup oats (blended into flour)",
+            "1 egg",
+            "½ cup milk (plant-based or regular)",
+            "1 tsp baking powder",
+            "1 tsp cinnamon",
+          ],
+          preparation:
+            "Mix all ingredients in a bowl.Heat a non-stick pan and pour batter to form pancakes.Cook until bubbles form, then flip and cook the other side.Serve with fresh fruits or honey.",
+        },
+        {
+          title: "Berry Banana Spinach Smoothie",
+          ingredients: [
+            "1 banana (frozen for creaminess)",
+            "1 cup mixed berries (strawberries, blueberries, raspberries)",
+            "1 cup fresh spinach",
+            "1 cup almond milk (or any milk of choice)",
+            "1 tbsp chia seeds (optional for added fiber)",
+          ],
+          preparation:
+            "Combine all ingredients in a blender.Blend until smooth and creamy.Pour into a glass and enjoy!",
+        },
+        {
+          title: "Spinach and Mushroom Omelette",
+          ingredients: [
+            "3 eggs (beaten)",
+            "1 cup spinach (chopped)",
+            "½ cup mushrooms (sliced)",
+            "Olive oil",
+            "Salt and pepper to taste",
+          ],
+          preparation:
+            "Sauté mushrooms and spinach in olive oil.Pour beaten eggs over the vegetables.Cook until eggs are set.Season with salt and pepper.",
+        },
+
+        {
+          title: "Grilled Lemon Garlic Salmon",
+          ingredients: [
+            "2 salmon fillets",
+            "2 tbsp olive oil",
+            "2 tbsp lemon juice",
+            "2 garlic cloves (minced)",
+            "1 tsp black pepper",
+            "½ tsp salt",
+            "1 tsp dried oregano (or parsley)",
+          ],
+          preparation:
+            "In a bowl, mix olive oil, lemon juice, minced garlic, salt, pepper, and oregano.Coat the salmon fillets with the marinade and let them rest for 15-20 minutes.Preheat the grill to medium heat and lightly oil the grates.Grill the salmon for 4-5 minutes per side until golden and cooked through.Serve with steamed vegetables or a fresh salad.",
+        },
+        {
+          title: "Stuffed Bell Peppers ",
+          ingredients: [
+            "3 large bell peppers (any color)",
+            "1 cup cooked quinoa (or brown rice)",
+            "½ cup black beans (cooked)",
+            "½ cup diced tomatoes",
+            "¼ cup corn kernels",
+            "1 tsp olive oil",
+            "½ tsp cumin",
+            "½ tsp paprika",
+            "Salt & pepper to taste",
+            "¼ cup shredded cheese (optional)",
+          ],
+          preparation:
+            "Preheat oven to 375°F (190°C). Cut the tops off the bell peppers and remove seeds. In a pan, heat olive oil and sauté quinoa, black beans, tomatoes, corn, and spices for 2-3 minutes. Stuff the mixture into the bell peppers and top with cheese (if using) Place the peppers in a baking dish, cover with foil, and bake for 25-30 minutes. Remove foil and bake for another 5 minutes until peppers are tender.",
+        },
+        {
+          title: "Mango & Spinach Smoothie ",
+          ingredients: [
+            "1 cup fresh mango chunks",
+            "1 cup fresh spinach leaves",
+            "1 banana",
+            "1 cup almond milk (or any milk)",
+            "1 tsp honey (optional)",
+            "Ice cubes (optional)",
+          ],
+          preparation:
+            "Add all ingredients to a blender. Blend until smooth and creamy. Pour into a glass and enjoy!",
+        },
+        {
+          title: "Kale & Apple Salad ",
+          ingredients: [
+            "2 cups fresh kale (chopped)",
+            "1 apple (sliced)",
+            "¼ cup walnuts (chopped)",
+            "¼ cup feta cheese (optional)",
+            "2 tbsp olive oil",
+            "1 tbsp lemon juice",
+            "1 tsp honey",
+            "Salt & pepper to taste",
+          ],
+          preparation:
+            " Massage chopped kale with olive oil for 2 minutes to soften. Add sliced apples, walnuts, and feta cheese. In a small bowl, mix lemon juice, honey, salt, and pepper. Drizzle dressing over the salad, toss well, and serve!",
+        },
+        {
+          title: "Dark Chocolate Avocado Mousse",
+          ingredients: [
+            "1 ripe avocado",
+            "2 tbsp cocoa powder",
+            "2 tbsp honey or maple syrup",
+            "¼ cup milk (almond or regular)",
+            "½ tsp vanilla extract",
+            "A pinch of salt",
+          ],
+          preparation:
+            " Blend all ingredients until smooth and creamy. Adjust sweetness if needed. Chill for 15-20 minutes before serving. Garnish with berries or nuts (optional) and enjoy!",
+        },
+      ];
+      function viewRecipe(index) {
+        const modal = document.getElementById("recipeModal");
+        const recipe = recipes[index];
+
+        document.getElementById("recipeTitle").textContent = recipe.title;
+
+        
+       
+       const ingredientsList = document.getElementById("recipeIngredients");
+        ingredientsList.innerHTML = "";
+        recipe.ingredients.forEach((ingredient) => {
+          const li = document.createElement("li");
+          li.textContent = ingredient;
+          ingredientsList.appendChild(li);
+        });
+
+        document.getElementById("recipePreparation").textContent =
+          recipe.preparation;
+
+        modal.style.display = "flex";
+      }
+      function closeModal() {
+        document.getElementById("recipeModal").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

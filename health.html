@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fit Sense - Health Suggestion</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: gray;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .form-container {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        text-align: center;
+        color: white;
+      }
+
+      .form-container h2 {
+        margin-bottom: 1rem;
+        font-weight: 600;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .form-container select,
+      .form-container button {
+        width: 100%;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        border-radius: 10px;
+        border: none;
+        font-size: 1rem;
+        font-weight: 500;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .form-container button {
+        background: linear-gradient(45deg, #00c6ff, #0072ff);
+        color: white;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+
+      .form-container button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 255, 255, 0.5);
+      }
+
+      .result-box {
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 1rem;
+        text-align: left;
+        font-weight: 400;
+      }
+    
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    padding: 20px;
+    height: auto;
+    align-items: stretch;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+
+  .form-container select,
+  .form-container button {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .result-box {
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+
+  .form-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Get Health Suggestion</h2>
+      <select id="diseaseSelect">
+        <option value="">Select Disease</option>
+        <option value="obesity">Obesity</option>
+        <option value="diabetes">Diabetes (Type 2)</option>
+        <option value="hypertension">Hypertension</option>
+        <option value="heart">Heart Disease</option>
+        <option value="pcos">PCOS</option>
+        <option value="asthma">Asthma</option>
+        <option value="arthritis">Arthritis</option>
+        <option value="depression">Depression</option>
+        <option value="anemia">Anemia</option>
+        <option value="migraine">Migraine</option>
+        <option value="ThyroidDisorders">Thyroid Disorders</option>
+        <option value="Gastritis">Gastritis</option>
+        <option value="Acidreflux">Acid Reflux (GERD)</option>
+        <option value="Constipation">Constipation</option>
+        <option value="Skin">Skin Problems (Acne, Eczema, Psoriasis)</option>
+        <option value="ColdFlu">Cold & Flu</option>
+        <option value="Insomnia">Insomnia (Sleep Issues)</option>
+        <option value="Osteoporosis">Osteoporosis (Weak Bones)</option>
+        <option value="KidneyStones">Kidney Stones</option>
+        <option value="FattyLiverDisease">Fatty Liver Disease</option>
+      </select>
+      <button onclick="getSuggestion()">Get Suggestion</button>
+      <div id="result" class="result-box"></div>
+    </div>
+    <script>
+      const suggestions = {
+        obesity: {
+          diet: "High-fiber, low-carb, lean proteins, healthy fats, whole grains.",
+          exercise: "Walking, jogging, strength training, HIIT workouts.",
+          do: "Drink plenty of water, eat home-cooked meals, portion control.",
+          dont: "Avoid sugary drinks, junk food, processed carbs, and excessive snacking.",
+        },
+        diabetes: {
+          diet: "Low-carb, high-fiber, lean proteins, whole grains, leafy greens.",
+          exercise: "Brisk walking, swimming, resistance training, yoga.",
+          do: "Eat small frequent meals, focus on low GI foods, stay active.",
+          dont: "Avoid white bread, sugary foods, processed snacks, alcohol.",
+        },
+        hypertension: {
+          diet: "DASH diet (fruits, veggies, whole grains, low sodium, potassium-rich foods).",
+          exercise: "Walking, cycling, deep breathing, weight training.",
+          do: "Reduce salt intake, stay hydrated, include potassium-rich foods.",
+          dont: "Avoid processed foods, caffeine, excessive alcohol, and stress.",
+        },
+        heart: {
+          diet: "Mediterranean diet (olive oil, fish, nuts, whole grains, low sodium).",
+          exercise: "Brisk walking, cycling, swimming, resistance training.",
+          do: "Control cholesterol levels, consume healthy fats, and exercise regularly.",
+          dont: "Avoid red meat, excessive salt, fried foods, and smoking.",
+        },
+        pcos: {
+          diet: "Low GI foods, high protein, whole grains, fiber-rich foods.",
+          execise: "Strength training, yoga, pilates, cardio.",
+          do: "Maintain a regular eating schedule, consume anti-inflammatory foods.",
+          dont: "Avoid sugar, dairy, processed carbs, and trans fats.",
+        },
+        asthma: {
+          diet: "Anti-inflammatory foods (ginger, turmeric, omega-3s, green leafy veggies).",
+          exerrcise: "Breathing exercises, swimming, walking, cycling.",
+          do: "Use a humidifier, stay hydrated, maintain a healthy weight.",
+          dont: "Avoid cold air exposure, smoking, and processed foods.",
+        },
+        arthritis: {
+          diet: "Omega-3-rich foods (salmon, walnuts), anti-inflammatory foods.",
+          exercise: "Swimming, stretching, yoga, low-impact workouts.",
+          do: "Maintain a healthy weight, include turmeric and ginger in meals.",
+          dont: "Avoid sugary drinks, fried foods, and excessive red meat.",
+        },
+        depression: {
+          diet: "Omega-3s, dark chocolate, green leafy veggies, whole grains.",
+          exercise: "Yoga, deep breathing, cardio, outdoor walks.",
+          do: "Get sunlight exposure, practice meditation, stay social.",
+          dont: "Avoid caffeine, processed sugar, and alcohol.",
+        },
+        anemia: {
+          diet: " Iron-rich foods (spinach, red meat, lentils, nuts, fortified cereals).",
+          exercise:
+            "Light cardio, yoga, resistance training (avoid high-intensity).",
+          do: "Include vitamin C-rich foods for better iron absorption.",
+          dont: "Avoid tea and coffee with meals as they hinder iron absorption.",
+        },
+        migraine: {
+          diet: " Magnesium-rich foods (almonds, spinach), hydration, ginger tea.",
+          exercise: "Yoga, meditation, walking, light stretching.",
+          do: "Get enough sleep, maintain a regular eating pattern.",
+          dont: "Avoid caffeine, processed foods, artificial sweeteners.",
+        },
+        ThyroidDisorders: {
+          diet: "Iodine-rich foods (seaweed, fish), selenium (Brazil nuts), zinc-rich foods.",
+          exercise: "Low-impact workouts, swimming, yoga, weightlifting.",
+          do: "Eat balanced meals, manage stress, get enough sleep.",
+          dont: "Avoid excessive soy, gluten, and raw cruciferous vegetables.",
+        },
+        Gastritis: {
+          diet: "Soft foods, probiotics (yogurt), avoid spicy foods and caffeine.",
+          exercise:
+            "Yoga, light stretching, walking, core-strengthening exercises.",
+          do: "Eat small frequent meals, include fermented foods.",
+          dont: "Avoid alcohol, caffeine, and spicy foods.",
+        },
+        Acidreflux: {
+          diet: "Low-acid foods (bananas, oatmeal, lean proteins), herbal teas.",
+          exercise:
+            "Walking, gentle stretching, avoid high-intensity workouts post meals.",
+          do: "Eat smaller meals, elevate the head while sleeping.",
+          dont: "Avoid spicy foods, carbonated drinks, alcohol, and smoking.",
+        },
+        Constipation: {
+          diet: "High-fiber (fruits, veggies, whole grains), plenty of water.",
+          exercise: "Walking, yoga, abdominal massages, stretching.",
+          do: "Stay hydrated, eat fiber-rich foods, stay active.",
+          dont: "Avoid processed foods, excessive dairy, and refined carbs.",
+        },
+        Skin: {
+          diet: "Antioxidant-rich foods (berries, green tea), omega-3s, lots of water.",
+          exercise: "Running, yoga, or swimming to flush toxins.",
+          do: "Stay hydrated, eat anti-inflammatory foods.",
+          dont: "Avoid dairy, processed foods, and excessive sugar.",
+        },
+        ColdFlu: {
+          diet: "Vitamin C (citrus fruits, bell peppers), warm soups, herbal teas.",
+          exercise: "Light stretching, walking, deep breathing.",
+          do: "Stay hydrated, get enough rest.",
+          dont: "Avoid cold beverages, junk food, and excessive sugar.",
+        },
+        Insomnia: {
+          diet: "Melatonin-rich foods (cherries, nuts, oats, bananas).",
+          exercise: "Yoga, meditation, light walking before bed.",
+          do: "Maintain a regular sleep schedule, limit screen time at night.",
+          dont: "Avoid caffeine, alcohol, and heavy meals before bed.",
+        },
+        Osteoporosis: {
+          diet: "Calcium & vitamin D (dairy, leafy greens, nuts, fish).",
+          exercise: "Strength training, weight-bearing exercises, walking.",
+          do: "Get sunlight exposure, consume dairy and nuts.",
+          dont: "Avoid excessive alcohol, caffeine, and smoking.",
+        },
+        KidneyStones: {
+          diet: "Hydration is key, citrus fruits, avoid high-oxalate foods (spinach, nuts).",
+          exercise: "Walking, light stretching, hydration-focused activities.",
+          do: "Drink plenty of water, eat calcium-rich foods in moderation.",
+          dont: "Avoid excessive salt, red meat, and sugary drinks.",
+        },
+        FattyLiverDisease: {
+          diet: "Low sugar, high fiber, lean proteins, avoid alcohol and processed foods.",
+          exercise: "Aerobic exercises, walking, jogging, resistance training.",
+          do: "Maintain a healthy weight, consume whole foods.",
+          dont: "Avoid sugary foods, alcohol, and fried foods.",
+        },
+      };
+
+      function getSuggestion() {
+        const disease = document.getElementById("diseaseSelect").value;
+        const resultBox = document.getElementById("result");
+        if (disease && suggestions[disease]) {
+          const { diet, exercise, do: doList, dont } = suggestions[disease];
+          resultBox.innerHTML = `
+                    <h3>Recommendations for ${
+                      disease.charAt(0).toUpperCase() + disease.slice(1)
+                    }</h3>
+                    <p><strong>Diet Plan:</strong> ${diet}</p>
+                    <p><strong>Exercise:</strong> ${exercise}</p>
+                    <p><strong>Do:</strong> ${doList}</p>
+                    <p><strong>Don't:</strong> ${dont}</p>
+                `;
+        } else {
+          resultBox.innerHTML = "<p>Please select a disease.</p>";
+        }
+      }
+    </script>
+  </body>
+</html>

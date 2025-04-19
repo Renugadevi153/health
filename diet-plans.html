@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diet Plans</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: url("images/dp1img.webp") no-repeat center center fixed;
+        background-size: cover; 
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+        color: white;
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("images/dp1img.webp") no-repeat center center fixed;
+        background-size: cover;
+        filter: blur(2px); 
+        z-index: -1;
+      }
+      .container {
+        max-width: 1100px;
+        margin: auto;
+        position: relative;
+        z-index: 1;
+      }
+      .diet-card {
+        background: rgba(20, 20, 20, 0.9);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border: 2px solid #fff;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        animation: rgbBorder 5s infinite alternate;
+        transition: transform 0.3s ease-in-out;
+      }
+      .diet-card:hover {
+        transform: scale(1.05);
+      }
+      .diet-card img {
+        width: 160px;
+        height: 160px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+      .diet-card h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #00ffcc;
+      }
+
+      .diet-card p {
+        font-size: 1.1rem;
+        color: #fff;
+        line-height: 1.6;
+      }
+      @keyframes rgbBorder {
+        0% {
+          border-color: #ff0000;
+        }
+        25% {
+          border-color: #ff7300;
+        }
+        50% {
+          border-color: #00ff00;
+        }
+        75% {
+          border-color: #007bff;
+        }
+        100% {
+          border-color: #ff00ff;
+        }
+      }
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    padding: 0 10px;
+  }
+
+  .diet-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .diet-card img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .diet-card h2 {
+    font-size: 1.4rem;
+  }
+
+  .diet-card p {
+    font-size: 1rem;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+
+  body {
+    padding: 10px;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <h1
+      style="
+        font-size: 3rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 8px rgba(0, 255, 204, 0.8);
+      "
+    >
+      Diet Plans
+    </h1>
+
+    <div class="container">
+      <div class="diet-card">
+        <img src="images/bd.webp" alt="Balanced Diet" />
+        <div>
+          <h2>Balanced Diet</h2>
+          <p>
+            Focus: A well-rounded diet including all macronutrients and
+            micronutrients.
+          </p>
+          <p>
+            Includes: Fruits, vegetables, whole grains, lean proteins, healthy
+            fats.
+          </p>
+          <p>
+            Best for: Overall health, maintaining weight, and balanced
+            nutrition.
+          </p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/mediterran.png" alt="Mediterranean Diet" />
+        <div>
+          <h2>Mediterranean Diet</h2>
+          <p>Focus: Heart health and longevity.</p>
+          <p>
+            Includes: Olive oil, fish, whole grains, nuts, fresh vegetables,
+            fruits, lean meats.
+          </p>
+          <p>
+            Best for: Reducing heart disease, weight loss, and inflammation.
+          </p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/keto.webp" alt="Keto Diet" />
+        <div>
+          <h2>Ketogenic (Keto) Diet</h2>
+          <p>Focus: High fat, very low carbs, moderate protein.</p>
+          <p>
+            Includes: Avocados, eggs, nuts, cheese, fatty meats, coconut oil.
+          </p>
+          <p>
+            Best for: Rapid weight loss, managing epilepsy, controlling blood
+            sugar.
+          </p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/paleo.png" alt="Paleo Diet" />
+        <div>
+          <h2>Paleo Diet</h2>
+          <p>Focus: Eating whole, unprocessed foods like our ancestors.</p>
+          <p>Includes: Meat, fish, eggs, vegetables, nuts, seeds, fruits.</p>
+          <p>
+            Best for: Reducing processed food intake, weight loss, and digestion
+            improvement.
+          </p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/vegan.jpg" alt="Vegan Diet" />
+        <div>
+          <h2>Vegan Diet</h2>
+          <p>Focus: 100% plant-based, no animal products.</p>
+          <p>
+            Includes: Fruits, vegetables, legumes, grains, nuts, plant-based
+            milk.
+          </p>
+          <p>
+            Best for: Ethical eating, heart health, and reducing cholesterol.
+          </p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/veg.jpg" alt="Vegetarian Diet" />
+        <div>
+          <h2>Vegetarian Diet</h2>
+          <p>Focus: Plant-based with some animal products.</p>
+          <p>
+            Includes: Lacto-vegetarian, Ovo-vegetarian, Lacto-ovo vegetarian.
+          </p>
+          <p>
+            Best for: Ethical eating, heart health, and reducing cholesterol.
+          </p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/lowcarbo.jpg" alt="Low-Carb Diet" />
+        <div>
+          <h2>Low-Carb Diet</h2>
+          <p>
+            Focus: Reducing carbohydrates for weight loss and blood sugar
+            control.
+          </p>
+          <p>Includes: Meat, fish, eggs, leafy greens, nuts, seeds.</p>
+          <p>Best for: Diabetes management, weight loss.</p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/fasting.jpg" alt="Intermittent Fasting (IF) Diet" />
+        <div>
+          <h2>Intermittent Fasting (IF)</h2>
+          <p>
+            Focus: Eating in specific time windows and fasting for certain
+            hours.
+          </p>
+          <p>
+            Popular Methods: 16:8 (fast for 16 hours, eat in 8-hour window) 5:2
+            (eat normally for 5 days, restrict calories for 2 days)
+          </p>
+          <p>Best for: Weight loss, improving metabolism, anti-aging.</p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/protein.jpg" alt="High-Protein Diet" />
+        <div>
+          <h2>High-Protein Diet</h2>
+          <p>Focus: Increasing protein intake for muscle gain and fat loss.</p>
+          <p>Includes: Lean meats, eggs, dairy, protein shakes, nuts, seeds.</p>
+          <p>Best for: Bodybuilders, athletes, muscle maintenance.</p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/gluten.jpg" alt="Gluten-Free Diet" />
+        <div>
+          <h2>Gluten-Free Diet</h2>
+          <p>Focus: Avoiding gluten (a protein in wheat, barley, and rye).</p>
+          <p>Includes: Rice, quinoa, corn, vegetables, fruits, dairy, meat.</p>
+          <p>Best for: Celiac disease, gluten sensitivity.</p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img
+          src="images/dash.jpg"
+          alt="DASH Diet (Dietary Approaches to Stop Hypertension)"
+        />
+        <div>
+          <h2>DASH Diet (Dietary Approaches to Stop Hypertension)</h2>
+          <p>Focus: Lowering blood pressure and promoting heart health.</p>
+          <p>
+            Includes: Fruits, vegetables, whole grains, low-fat dairy, lean
+            proteins.
+          </p>
+          <p>Best for: High blood pressure, heart disease prevention.</p>
+        </div>
+      </div>
+      <div class="diet-card">
+        <img src="images/carnivore.jpg" alt="Carnivore Diet" />
+        <div>
+          <h2>Carnivore Diet</h2>
+          <p>Focus: Eating only animal-based products (zero carbs).</p>
+          <p>Includes: Meat, fish, eggs, dairy.</p>
+          <p>Best for: Weight loss, inflammation reduction.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

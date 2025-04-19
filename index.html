@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthy Scale</title>
+    <style>
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: #fff;
+        padding: 5px; /* Reduced padding */
+        text-align: center;
+        border-bottom: 4px double #ffcc00;
+      }
+
+      .navbar-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: #333;
+        font-family: "Arial Black", sans-serif;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border: 4px double #ffcc00;
+        display: inline-block;
+        padding: 5px 15px;
+      }
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 100px 20px;
+        background-color: white;
+      }
+
+      /* Hero Image (Top-left) */
+      .hero-image {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        border: 5px solid darkgoldenrod;
+        background: url("images/home1.jpg") center/cover;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+
+      .start-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(45deg, #ff9800, #ff5722);
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: 0.3s;
+        position: absolute;
+        top: 300px;
+        left: 65px;
+      }
+      .start-btn:hover {
+        transform: scale(1.1);
+      }
+
+      /* Centered Content */
+      .hero-content {
+        max-width: 600px;
+      }
+      .hero h1 {
+        font-size: 40px;
+        color: #ff9800;
+      }
+      .hero h2 {
+        font-size: 24px;
+        color: #333;
+      }
+      .hero p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      /* Features Section */
+      .features {
+        display: flex;
+        justify-content: space-around;
+        padding: 50px;
+      }
+      .feature-card {
+        background: rgba(255, 255, 224, 0.3);
+        backdrop-filter: blur(15px);
+        border-radius: 10px;
+        padding: 20px;
+        width: 20%;
+        text-align: center;
+        border: 3px dashed transparent;
+        transition: 0.3s;
+        animation: borderAnimation 3s infinite linear;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1),
+          inset 0 4px 10px rgba(255, 255, 224, 0.5);
+      }
+      .feature-card:hover {
+        border-color: #ff9800;
+        transform: scale(1.05);
+      }
+      .feature-card img {
+        width: 80px;
+      }
+      .feature-card h3 {
+        font-size: 22px;
+        color: #ff5722;
+      }
+      .feature-card p {
+        font-size: 16px;
+        color: #555;
+      }
+      @keyframes borderAnimation {
+        0% {
+          border-color: #ff9800;
+        }
+        50% {
+          border-color: #ff5722;
+        }
+        100% {
+          border-color: #ff9800;
+        }
+      }
+
+      /* Footer */
+      footer {
+        background: #000;
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+      }
+      .footer-section {
+        width: 30%;
+      }
+      .footer-section h3 {
+        text-decoration: underline;
+        color: #ffcc00;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+      }
+      .footer-section ul li {
+        margin: 5px 0;
+      }
+      .footer-section ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .footer-section ul li a:hover {
+        color: #ffcc00;
+      }
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 60px 10px;
+  }
+
+  .hero-image {
+    position: static;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 20px;
+  }
+
+  .start-btn {
+    position: static;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero h2 {
+    font-size: 18px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  /* Feature Cards stack */
+  .features {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 15px;
+  }
+
+  .feature-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* Footer stacks vertically */
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 15px;
+  }
+
+  .footer-section {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <h1 class="navbar-title">HealthyScale</h1>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-image"></div>
+      <a href="home.html" class="start-btn">Let's Get Started</a>
+      <div class="hero-content">
+        <h1>HealthyScale</h1>
+        <h2>Your Personalized Health & Wellness Guide 🥗💪</h2>
+        <p>
+          Achieve a healthier lifestyle with our BMI calculator,
+          expert-recommended exercise plans, and personalized diet plans.
+        </p>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="feature-card">
+        <img src="images/bmiphoto.jpg" alt="BMI" />
+        <h3>BMI Calculator</h3>
+        <p>Know your Body Mass Index and take control of your health.</p>
+      </div>
+      <div class="feature-card">
+        <img src="images/dimg1.png" alt="Diet Plans" />
+        <h3>Diet Plans</h3>
+        <p>Get personalized diet plans that suit your needs.</p>
+      </div>
+      <div class="feature-card">
+        <img src="images/exerc3.png" alt="Exercise" />
+        <h3>Exercise Plans</h3>
+        <p>Expert-recommended exercise plans for a healthier life.</p>
+      </div>
+      <div class="feature-card">
+        <img src="images/healthyrecipes.jpg" alt="Healthy Recipes" />
+        <h3>Healthy Recipes</h3>
+        <p>Delicious and healthy recipes to keep you fit.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="bmi.html">BMI Calculator</a></li>
+          <li><a href="exercise.html">Exercise Plans</a></li>
+          <li><a href="diet-plans.html">Diet Plans</a></li>
+        </ul>
+      </div>
+      <div class="footer-section" style="text-align: center">
+        <h3>About</h3>
+        <p>Healthy Scale is your go-to platform for health & wellness tips.</p>
+      </div>
+      <div class="footer-section" style="text-align: right">
+        <h3>Contact</h3>
+        <p>Email: contact@healthyscale.com</p>
+        <p>Phone: +123 456 7890</p>
+      </div>
+    </footer>
+  </body>
+</html>

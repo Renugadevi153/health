@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator - Healthy Scale</title>
+    <style>
+  
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #000000, #444444);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+
+    
+      .bmi-container {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        width: 350px;
+      }
+
+      input {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      button {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background: #007bff;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      #bmiResult {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .diet-plan {
+        display: none;
+        cursor: pointer;
+        color: yellow;
+        text-decoration: underline;
+        margin-top: 10px;
+      }
+
+      .diet-plan:hover {
+        color: orange;
+      }
+  
+@media screen and (max-width: 480px) {
+  body {
+    padding: 1rem;
+    height: auto;
+  }
+
+  .bmi-container {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  input,
+  button {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  #bmiResult {
+    font-size: 1rem;
+  }
+
+  .diet-plan {
+    font-size: 0.95rem;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- BMI Calculator -->
+    <div class="bmi-container">
+      <h2>BMI Calculator</h2>
+      <input
+        type="number"
+        id="weight"
+        placeholder="Enter weight in kg"
+        required
+      />
+      <input
+        type="number"
+        id="height"
+        placeholder="Enter height in cm"
+        required
+      />
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <p id="bmiResult"></p>
+      <p class="diet-plan" id="dietPlan" onclick="showDietPlan()">
+        View Diet Plan
+      </p>
+    </div>
+
+    <script>
+      function calculateBMI() {
+        let weight = document.getElementById("weight").value;
+        let height = document.getElementById("height").value;
+
+        if (weight === "" || height === "") {
+          alert("Please enter weight and height");
+          return;
+        }
+
+        height = height / 100; // Convert height to meters
+        let bmi = (weight / (height * height)).toFixed(2);
+        let resultText = "";
+        let plan = "";
+
+        if (bmi < 18.5) {
+          resultText = `Your BMI is ${bmi} - Underweight`;
+          plan = "underweight";
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+          resultText = `Your BMI is ${bmi} - Normal weight`;
+          plan = "normal";
+        } else if (bmi >= 25 && bmi <= 29.9) {
+          resultText = `Your BMI is ${bmi} - Overweight`;
+          plan = "overweight";
+        } else {
+          resultText = `Your BMI is ${bmi} - Obesity`;
+          plan = "obesity";
+        }
+
+        document.getElementById("bmiResult").innerText = resultText;
+        document.getElementById("dietPlan").style.display = "block";
+        document.getElementById("dietPlan").setAttribute("data-plan", plan);
+      }
+
+      function showDietPlan() {
+        let plan = document
+          .getElementById("dietPlan")
+          .getAttribute("data-plan");
+        let imagePath = "";
+
+        switch (plan) {
+          case "underweight":
+            imagePath = "images/weightgain.jpg";
+            break;
+          case "normal":
+            imagePath = "images/balancediet.jpeg";
+            break;
+          case "overweight":
+            imagePath = "images/weightloss.jpg";
+            break;
+          case "obesity":
+            imagePath = "images/Obesity-Diet-Chart-v1.avif";
+            break;
+        }
+
+        if (imagePath !== "") {
+          window.open(imagePath, "_blank");
+        }
+      }
+
+      function goToHome() {
+        window.location.href = "index.html"; // Redirects to the home page
+      }
+    </script>
+  </body>
+</html>
